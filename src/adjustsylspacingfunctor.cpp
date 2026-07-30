@@ -114,12 +114,9 @@ FunctorCode AdjustSylSpacingFunctor::VisitVerse(Verse *verse)
 
     ListOfObjects syls = verse->FindAllDescendantsByType(SYL);
 
-    int shift = m_doc->GetDrawingUnit(m_staffSize);
-    Syl::AdjustToLyricSize(m_doc, shift);
-
     int previousSylShift = 0;
 
-    verse->SetDrawingXRel(-1 * shift);
+    verse->SetDrawingXRel(0);
 
     ListOfObjects::iterator iter = syls.begin();
     while (iter != syls.end()) {
@@ -143,6 +140,15 @@ FunctorCode AdjustSylSpacingFunctor::VisitVerse(Verse *verse)
     // not updated
     Syl *lastSyl = vrv_cast<Syl *>(syls.back());
     assert(lastSyl);
+
+    // Center the complete lyric syllable group on its owning rhythmic
+    // position. MusicXML defines lyric justification as centered by default,
+    // and MEI exposes the same horizontal-alignment semantics. Historically
+    // Verovio applied a fixed one-unit left offset and then drew text from
+    // that edge, which made longer words visibly start-biased.
+    const int contentLeft = firstSyl->GetDrawingXRel() + firstSyl->GetContentX1();
+    const int contentRight = lastSyl->GetDrawingXRel() + lastSyl->GetContentX2();
+    verse->SetDrawingXRel(-1 * (contentLeft + contentRight) / 2);
 
     // Not much to do when we hit the first syllable of the system
     if (m_previousVerse == NULL) {
@@ -177,7 +183,10 @@ FunctorCode AdjustSylSpacingFunctor::VisitVerse(Verse *verse)
         overlap += (label->GetContentX2() - label->GetContentX1()) + m_doc->GetDrawingDoubleUnit(m_staffSize);
     }
 
-    int nextFreeSpace = m_previousVerse->AdjustPosition(overlap, m_freeSpace, m_doc);
+    // Preserve note-centered lyrics. Resolve collisions by expanding the
+    // rhythmic alignment below instead of borrowing nearby whitespace to
+    // shift a word away from its owning note.
+    int nextFreeSpace = 0;
 
     if (overlap > 0) {
         // We are adjusting syl in two different measures - move only the right barline of the first measure
