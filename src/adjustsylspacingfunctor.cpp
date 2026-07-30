@@ -12,6 +12,7 @@
 #include "doc.h"
 #include "label.h"
 #include "labelabbr.h"
+#include "note.h"
 #include "staff.h"
 #include "syl.h"
 #include "verse.h"
@@ -141,14 +142,18 @@ FunctorCode AdjustSylSpacingFunctor::VisitVerse(Verse *verse)
     Syl *lastSyl = vrv_cast<Syl *>(syls.back());
     assert(lastSyl);
 
-    // Center the complete lyric syllable group on its owning rhythmic
-    // position. MusicXML defines lyric justification as centered by default,
-    // and MEI exposes the same horizontal-alignment semantics. Historically
-    // Verovio applied a fixed one-unit left offset and then drew text from
-    // that edge, which made longer words visibly start-biased.
+    // Center the complete lyric syllable group on the visual center of its
+    // owning notehead. A note's drawing x is the notehead's left edge, not
+    // its optical center, so centering on drawing x still makes every lyric
+    // appear left-justified under the note.
     const int contentLeft = firstSyl->GetDrawingXRel() + firstSyl->GetContentX1();
     const int contentRight = lastSyl->GetDrawingXRel() + lastSyl->GetContentX2();
-    verse->SetDrawingXRel(-1 * (contentLeft + contentRight) / 2);
+    int ownerCenter = 0;
+    Note *note = vrv_cast<Note *>(verse->GetFirstAncestor(NOTE));
+    if (note) {
+        ownerCenter = note->GetDrawingRadius(m_doc);
+    }
+    verse->SetDrawingXRel(ownerCenter - (contentLeft + contentRight) / 2);
 
     // Not much to do when we hit the first syllable of the system
     if (m_previousVerse == NULL) {

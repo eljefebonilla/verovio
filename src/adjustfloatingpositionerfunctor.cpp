@@ -43,8 +43,11 @@ FunctorCode AdjustFloatingPositionersFunctor::VisitStaffAlignment(StaffAlignment
             verseHeight *= m_doc->GetOptions()->m_lyricHeightFactor.GetValue();
             if (staffAlignment->GetVerseCountAbove(verseCollapse)) {
                 int margin = m_doc->GetTopMargin(SYL) * drawingUnit;
-                int minMargin = std::max((int)(m_doc->GetOptions()->m_lyricTopMinMargin.GetValue() * drawingUnit),
-                    staffAlignment->GetOverflowAbove());
+                // lyricTopMinMargin is clearance between the nearest staff
+                // ink and lyric ink. Add it after the overflow rather than
+                // replacing it when a note or ledger line leaves the staff.
+                int minMargin = staffAlignment->GetOverflowAbove()
+                    + (int)(m_doc->GetOptions()->m_lyricTopMinMargin.GetValue() * drawingUnit);
                 staffAlignment->SetOverflowAbove(
                     minMargin + staffAlignment->GetVerseCountAbove(verseCollapse) * (verseHeight + margin));
                 // For now just clear the overflowBelow, which avoids the overlap to be calculated. We could also keep
@@ -53,8 +56,10 @@ FunctorCode AdjustFloatingPositionersFunctor::VisitStaffAlignment(StaffAlignment
             }
             if (staffAlignment->GetVerseCountBelow(verseCollapse)) {
                 int margin = m_doc->GetBottomMargin(SYL) * drawingUnit;
-                int minMargin = std::max((int)(m_doc->GetOptions()->m_lyricTopMinMargin.GetValue() * drawingUnit),
-                    staffAlignment->GetOverflowBelow());
+                // Keep the same staff-space clearance beneath low notes and
+                // ledger lines that is present beneath notes inside the staff.
+                int minMargin = staffAlignment->GetOverflowBelow()
+                    + (int)(m_doc->GetOptions()->m_lyricTopMinMargin.GetValue() * drawingUnit);
                 staffAlignment->SetOverflowBelow(
                     minMargin + staffAlignment->GetVerseCountBelow(verseCollapse) * (verseHeight + margin));
                 // For now just clear the overflowBelow, which avoids the overlap to be calculated. We could also keep
