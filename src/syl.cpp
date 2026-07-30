@@ -108,7 +108,12 @@ int Syl::CalcConnectorSpacing(Doc *doc, int staffSize)
 
     // We have a word connector - the space have to be wide enough
     if ((pos == sylLog_WORDPOS_i) || (pos == sylLog_WORDPOS_m)) {
-        spacing = 2 * this->CalcHyphenLength(doc, staffSize);
+        // Keep at least 0.75 staff spaces of clear air around the hyphen.
+        // A drawing unit is half a staff space, so 1.5 units is the
+        // publisher-derived minimum outside air. The connector glyph itself
+        // is added separately because spacing measures the full lyric gap.
+        const int outsideAir = (3 * doc->GetDrawingUnit(staffSize) + 1) / 2;
+        spacing = this->CalcHyphenLength(doc, staffSize) + outsideAir;
     }
     // Elision
     else if (con == sylLog_CON_b) {
