@@ -108,12 +108,12 @@ int Syl::CalcConnectorSpacing(Doc *doc, int staffSize)
 
     // We have a word connector - the space have to be wide enough
     if ((pos == sylLog_WORDPOS_i) || (pos == sylLog_WORDPOS_m)) {
-        // Reserve 1.5 staff spaces around the hyphen before system
+        // Reserve 2 staff spaces around the hyphen before system
         // justification. Phone reflow may compress that allowance by as much
         // as half, while the publisher-derived rendered floor remains 0.75
         // staff spaces. The connector glyph itself is added separately
         // because spacing measures the full lyric gap.
-        const int outsideAir = 3 * doc->GetDrawingUnit(staffSize);
+        const int outsideAir = 4 * doc->GetDrawingUnit(staffSize);
         spacing = this->CalcHyphenLength(doc, staffSize) + outsideAir;
     }
     // Elision
