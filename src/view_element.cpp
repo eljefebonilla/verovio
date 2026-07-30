@@ -1948,8 +1948,19 @@ void View::DrawVerse(DeviceContext *dc, LayerElement *element, Layer *layer, Sta
         }
         labelTxt.SetPointSize(pointSize);
 
+        int sharedLyricLeft = verse->GetDrawingX();
+        if (layerElement) {
+            const ListOfObjects siblingVerses =
+                layerElement->FindAllDescendantsByType(VERSE, 1);
+            for (Object *object : siblingVerses) {
+                Verse *sibling = vrv_cast<Verse *>(object);
+                assert(sibling);
+                sharedLyricLeft = std::min(sharedLyricLeft, sibling->GetDrawingX());
+            }
+        }
+
         TextDrawingParams params;
-        params.m_x = verse->GetDrawingX() - m_doc->GetDrawingUnit(staff->m_drawingStaffSize);
+        params.m_x = sharedLyricLeft - m_doc->GetDrawingUnit(staff->m_drawingStaffSize);
         params.m_y = staff->GetDrawingY() + this->GetSylYRel(std::max(1, verse->GetN()), staff, verse->GetPlace());
         params.m_pointSize = labelTxt.GetPointSize();
 
