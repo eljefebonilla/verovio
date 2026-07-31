@@ -22,6 +22,7 @@
 
 use strict;
 use Getopt::Long;
+use Cwd qw(abs_path);
 
 sub print_help {
 print <<"EOT";
@@ -76,6 +77,10 @@ GetOptions (
 my $FLAGS = "-O3";
 $FLAGS .= " -DNDEBUG";
 $FLAGS .= " -std=c++$cpp";
+my $SOURCE_ROOT = abs_path($VEROVIO_ROOT);
+die "ERROR: Verovio source root not found.\n" unless $SOURCE_ROOT;
+$FLAGS .= " -ffile-prefix-map=$SOURCE_ROOT=/src/verovio";
+$FLAGS .= " -fmacro-prefix-map=$SOURCE_ROOT=/src/verovio";
 
 my $LFLAGS =  " -s ASM_JS=1";
 $LFLAGS .= " -s INITIAL_MEMORY=128MB";
