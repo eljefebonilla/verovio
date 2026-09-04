@@ -110,6 +110,7 @@ public:
     ///@{
     void MoveTextTo(int x, int y, data_HORIZONTALALIGNMENT alignment) override;
     void MoveTextVerticallyTo(int y) override;
+    void AddTextSpacing(int x) override;
     ///@}
 
     /**

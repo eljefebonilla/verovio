@@ -41,6 +41,7 @@ SvgDeviceContext::SvgDeviceContext(const std::string &docId) : DeviceContext(SVG
 
     m_originX = 0;
     m_originY = 0;
+    m_pendingTextSpacing = 0;
 
     m_smuflGlyphs.clear();
 
@@ -1002,6 +1003,7 @@ void SvgDeviceContext::DrawRoundedRectangle(int x, int y, int width, int height,
 
 void SvgDeviceContext::StartText(int x, int y, data_HORIZONTALALIGNMENT alignment)
 {
+    assert(m_pendingTextSpacing == 0);
     std::string s;
     std::string anchor;
 
@@ -1068,8 +1070,14 @@ void SvgDeviceContext::MoveTextVerticallyTo(int y)
     m_currentNode.append_attribute("y") = y;
 }
 
+void SvgDeviceContext::AddTextSpacing(int x)
+{
+    m_pendingTextSpacing += x;
+}
+
 void SvgDeviceContext::EndText()
 {
+    assert(m_pendingTextSpacing == 0);
     m_svgNodeStack.pop_back();
     m_currentNode = m_svgNodeStack.back();
 }
@@ -1097,6 +1105,10 @@ void SvgDeviceContext::DrawText(
     std::string fontFaceName = m_fontStack.top()->GetFaceName();
 
     pugi::xml_node textChild = AddChild("tspan");
+    if (m_pendingTextSpacing != 0) {
+        textChild.append_attribute("dx") = m_pendingTextSpacing;
+        m_pendingTextSpacing = 0;
+    }
     // We still add @xml:space (No: this seems to create problems with Safari)
     // textChild.append_attribute("xml:space") = "preserve";
     // Set the @font-family only if it is not the same as in the parent node

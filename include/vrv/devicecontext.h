@@ -234,6 +234,7 @@ public:
     ///@{
     virtual void MoveTextTo(int x, int y, data_HORIZONTALALIGNMENT alignment) = 0;
     virtual void MoveTextVerticallyTo(int y) = 0;
+    virtual void AddTextSpacing(int x) = 0;
     ///@}
 
     /**

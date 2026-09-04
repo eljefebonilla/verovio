@@ -1545,6 +1545,26 @@ Options::Options()
     m_tempoDist.Init(0.5, 0.5, 16.0);
     this->Register(&m_tempoDist, "tempoDist", &m_generalLayout);
 
+    m_tempoParenNotePadding.SetInfo("Tempo parenthesis-note padding",
+        "Additional horizontal gap after an opening tempo parenthesis, in staff spaces");
+    m_tempoParenNotePadding.Init(0.0, 0.0, 4.0);
+    this->Register(&m_tempoParenNotePadding, "tempoParenNotePadding", &m_generalLayout);
+
+    m_tempoNoteEqualsPadding.SetInfo(
+        "Tempo note-equals padding", "Additional horizontal gap between a tempo note and equals sign, in staff spaces");
+    m_tempoNoteEqualsPadding.Init(0.0, 0.0, 4.0);
+    this->Register(&m_tempoNoteEqualsPadding, "tempoNoteEqualsPadding", &m_generalLayout);
+
+    m_tempoEqualsTextPadding.SetInfo(
+        "Tempo equals-text padding", "Additional horizontal gap after a tempo equals sign, in staff spaces");
+    m_tempoEqualsTextPadding.Init(0.0, 0.0, 4.0);
+    this->Register(&m_tempoEqualsTextPadding, "tempoEqualsTextPadding", &m_generalLayout);
+
+    m_tempoClosingParenPadding.SetInfo("Tempo closing-parenthesis padding",
+        "Additional horizontal gap before a closing tempo parenthesis, in staff spaces");
+    m_tempoClosingParenPadding.Init(0.0, 0.0, 4.0);
+    this->Register(&m_tempoClosingParenPadding, "tempoClosingParenPadding", &m_generalLayout);
+
     m_tempoNoteSize.SetInfo(
         "Tempo note size", "The scale of music-note glyphs in tempo indications compared to their default size");
     m_tempoNoteSize.Init(1.0, 0.25, 1.0);

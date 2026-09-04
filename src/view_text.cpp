@@ -526,7 +526,18 @@ void View::DrawText(DeviceContext *dc, Text *text, TextDrawingParams &params)
         }
     }
     else {
-        this->DrawTextString(dc, text->GetText(), params);
+        const std::u32string &content = text->GetText();
+        if (text->GetFirstAncestor(TEMPO) && m_options->m_tempoClosingParenPadding.IsSet()
+            && (m_options->m_tempoClosingParenPadding.GetValue() > 0.0) && (content.length() > 1)
+            && (content.back() == U')')) {
+            this->DrawTextString(dc, content.substr(0, content.length() - 1), params);
+            const int drawingUnit = 2 * m_doc->GetDrawingUnit(100);
+            dc->AddTextSpacing(std::lround(m_options->m_tempoClosingParenPadding.GetValue() * drawingUnit));
+            this->DrawTextString(dc, U")", params);
+        }
+        else {
+            this->DrawTextString(dc, content, params);
+        }
     }
 
     params.m_actualWidth = text->GetContentRight();
