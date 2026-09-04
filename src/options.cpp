@@ -1483,6 +1483,26 @@ Options::Options()
     m_slurMidpointThickness.Init(0.6, 0.2, 1.2);
     this->Register(&m_slurMidpointThickness, "slurMidpointThickness", &m_generalLayout);
 
+    m_slurStemlessClearance.SetInfo("Stemless slur clearance",
+        "Additional outward vertical clearance for unbroken stemless-note slurs in staff spaces");
+    m_slurStemlessClearance.Init(0.0, 0.0, 2.0);
+    this->Register(&m_slurStemlessClearance, "slurStemlessClearance", &m_generalLayout);
+
+    m_slurStemlessSlope.SetInfo("Stemless slur slope",
+        "Additional endpoint slope relative to the pitch interval for unbroken stemless-note slurs");
+    m_slurStemlessSlope.Init(0.0, 0.0, 1.0);
+    this->Register(&m_slurStemlessSlope, "slurStemlessSlope", &m_generalLayout);
+
+    m_slurStemlessNormalOffset.SetInfo("Stemless slur normal offset",
+        "Horizontal component of the outward note-chord normal offset for unbroken stemless-note slurs in staff spaces");
+    m_slurStemlessNormalOffset.Init(0.0, 0.0, 2.0);
+    this->Register(&m_slurStemlessNormalOffset, "slurStemlessNormalOffset", &m_generalLayout);
+
+    m_slurStemlessHorizontalOffset.SetInfo("Stemless slur horizontal offset",
+        "Common horizontal endpoint offset for unbroken stemless-note slurs in staff spaces");
+    m_slurStemlessHorizontalOffset.Init(0.0, -1.0, 1.0);
+    this->Register(&m_slurStemlessHorizontalOffset, "slurStemlessHorizontalOffset", &m_generalLayout);
+
     m_slurSymmetry.SetInfo("Slur symmetry", "Slur symmetry - high value means more symmetric slurs");
     m_slurSymmetry.Init(0.0, 0.0, 1.0);
     this->Register(&m_slurSymmetry, "slurSymmetry", &m_generalLayout);

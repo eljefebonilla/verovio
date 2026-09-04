@@ -1003,6 +1003,39 @@ std::pair<Point, Point> Slur::CalcEndPoints(const Doc *doc, const Staff *staff, 
     }
     y2 += 1.25 * sign * unit;
 
+    // Optional attachment style for real stemless notes. These independent controls
+    // describe geometry; they do not infer a publisher style from the score.
+    const Options *options = doc->GetOptions();
+    const double clearance = options->m_slurStemlessClearance.GetValue();
+    const double slope = options->m_slurStemlessSlope.GetValue();
+    const double normalOffset = options->m_slurStemlessNormalOffset.GetValue();
+    const double horizontalOffset = options->m_slurStemlessHorizontalOffset.GetValue();
+    if ((clearance != 0.0) || (slope != 0.0) || (normalOffset != 0.0) || (horizontalOffset != 0.0)) {
+        const bool eligible = (spanningType == SPANNING_START_END) && startNote && endNote && !startChord
+            && !endChord && !startNote->IsGraceNote() && !endNote->IsGraceNote() && (startStemLen == 0)
+            && (endStemLen == 0) && (portatoSlurType == PortatoSlurType::None)
+            && ((drawingCurveDir == curvature_CURVEDIR_above) || (drawingCurveDir == curvature_CURVEDIR_below));
+        if (eligible) {
+            const Staff *startStaff = startNote->GetAncestorStaff(RESOLVE_CROSS_STAFF, false);
+            const Staff *endStaff = endNote->GetAncestorStaff(RESOLVE_CROSS_STAFF, false);
+            if (startStaff && endStaff && (startStaff->GetN() == endStaff->GetN())
+                && (startNote->GetFirstAncestor(SYSTEM) == endNote->GetFirstAncestor(SYSTEM))) {
+                const double dx = endNote->GetDrawingX() + endNote->GetDrawingRadius(doc)
+                    - startNote->GetDrawingX() - startNote->GetDrawingRadius(doc);
+                const double dy = endNote->GetDrawingY() - startNote->GetDrawingY();
+                if (dx > 0.0) {
+                    const double staffSpace = doc->GetDrawingDoubleUnit(staff->m_drawingStaffSize);
+                    const double normalX = -sign * dy / std::hypot(dx, dy);
+                    const int xShift = std::lround(staffSpace * (normalOffset * normalX + horizontalOffset));
+                    x1 += xShift;
+                    x2 += xShift;
+                    y1 += std::lround(sign * staffSpace * clearance - slope * dy / 2.0);
+                    y2 += std::lround(sign * staffSpace * clearance + slope * dy / 2.0);
+                }
+            }
+        }
+    }
+
     return std::make_pair(Point(x1, y1), Point(x2, y2));
 }
 

@@ -754,6 +754,10 @@ public:
     OptionDbl m_slurMargin;
     OptionInt m_slurMaxSlope;
     OptionDbl m_slurMidpointThickness;
+    OptionDbl m_slurStemlessClearance;
+    OptionDbl m_slurStemlessSlope;
+    OptionDbl m_slurStemlessNormalOffset;
+    OptionDbl m_slurStemlessHorizontalOffset;
     OptionDbl m_slurSymmetry;
     OptionInt m_spacingBraceGroup;
     OptionInt m_spacingBracketGroup;
