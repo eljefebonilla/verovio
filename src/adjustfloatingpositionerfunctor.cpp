@@ -238,8 +238,12 @@ FunctorCode AdjustFloatingPositionersFunctor::VisitSystem(System *system)
     m_classId = REPEATMARK;
     system->m_systemAligner.Process(*this);
 
-    m_classId = TEMPO;
-    system->m_systemAligner.Process(*this);
+    // Preserve the historical default ordering. When tempoDist is set, defer
+    // tempo until after harmony so overlapping tempo indications stack above it.
+    if (!m_doc->GetOptions()->m_tempoDist.IsSet()) {
+        m_classId = TEMPO;
+        system->m_systemAligner.Process(*this);
+    }
 
     m_classId = PEDAL;
     system->m_systemAligner.Process(*this);
@@ -258,6 +262,11 @@ FunctorCode AdjustFloatingPositionersFunctor::VisitSystem(System *system)
     system->m_systemAligner.Process(adjustFloatingPositionerGrps);
     adjustFloatingPositionerGrps.SetPlace(STAFFREL_below);
     system->m_systemAligner.Process(adjustFloatingPositionerGrps);
+
+    if (m_doc->GetOptions()->m_tempoDist.IsSet()) {
+        m_classId = TEMPO;
+        system->m_systemAligner.Process(*this);
+    }
 
     m_classId = ENDING;
     system->m_systemAligner.Process(*this);

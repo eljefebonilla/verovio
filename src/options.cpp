@@ -1541,6 +1541,15 @@ Options::Options()
     m_systemMaxPerPage.Init(0, 0, 24);
     this->Register(&m_systemMaxPerPage, "systemMaxPerPage", &m_generalLayout);
 
+    m_tempoDist.SetInfo("Tempo dist", "The default distance from the staff of tempo indications");
+    m_tempoDist.Init(0.5, 0.5, 16.0);
+    this->Register(&m_tempoDist, "tempoDist", &m_generalLayout);
+
+    m_tempoNoteSize.SetInfo(
+        "Tempo note size", "The scale of music-note glyphs in tempo indications compared to their default size");
+    m_tempoNoteSize.Init(1.0, 0.25, 1.0);
+    this->Register(&m_tempoNoteSize, "tempoNoteSize", &m_generalLayout);
+
     m_textEnclosureThickness.SetInfo("Text box line thickness", "The thickness of the line text enclosing box");
     m_textEnclosureThickness.Init(0.2, 0.10, 0.80);
     this->Register(&m_textEnclosureThickness, "textEnclosureThickness", &m_generalLayout);
