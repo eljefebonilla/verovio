@@ -298,6 +298,12 @@ void BBoxDeviceContext::MoveTextVerticallyTo(int y)
     // m_textY = y;
 }
 
+void BBoxDeviceContext::AddTextSpacing(int x)
+{
+    assert(m_drawingText);
+    m_textWidth += x;
+}
+
 void BBoxDeviceContext::DrawText(
     const std::string &text, const std::u32string &wtext, int x, int y, int width, int height)
 {

@@ -110,6 +110,7 @@ public:
     ///@{
     void MoveTextTo(int x, int y, data_HORIZONTALALIGNMENT alignment) override;
     void MoveTextVerticallyTo(int y) override;
+    void AddTextSpacing(int x) override;
     ///@}
 
     /**
@@ -388,6 +389,7 @@ private:
     pugi::xml_node m_pageNode;
     pugi::xml_node m_currentNode;
     std::list<pugi::xml_node> m_svgNodeStack;
+    int m_pendingTextSpacing;
 
     // output as mm (for pdf generation with a 72 dpi)
     bool m_mmOutput;

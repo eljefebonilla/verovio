@@ -49,6 +49,7 @@
 #include "pageelement.h"
 #include "pagemilestone.h"
 #include "reh.h"
+#include "rend.h"
 #include "smufl.h"
 #include "staff.h"
 #include "system.h"
@@ -1833,7 +1834,36 @@ void View::DrawTextChildren(DeviceContext *dc, Object *parent, TextDrawingParams
         }
     }
 
+    Object *previous = nullptr;
     for (Object *current : parent->GetChildren()) {
+        if (parent->Is(TEMPO) && previous) {
+            auto getText = [](Object *object) -> Text * {
+                if (object->Is(TEXT)) return vrv_cast<Text *>(object);
+                return vrv_cast<Text *>(object->FindDescendantByType(TEXT));
+            };
+            auto isSmuflRend = [](Object *object) {
+                Rend *rend = object->Is(REND) ? vrv_cast<Rend *>(object) : nullptr;
+                return rend && rend->HasGlyphAuth() && (rend->GetGlyphAuth() == "smufl");
+            };
+            Text *previousText = getText(previous);
+            Text *currentText = getText(current);
+            const int drawingUnit = 2 * m_doc->GetDrawingUnit(100);
+            if (previousText && !previousText->GetText().empty() && (previousText->GetText().back() == U'(')
+                && isSmuflRend(current) && m_options->m_tempoParenNotePadding.IsSet()
+                && (m_options->m_tempoParenNotePadding.GetValue() > 0.0)) {
+                dc->AddTextSpacing(std::lround(m_options->m_tempoParenNotePadding.GetValue() * drawingUnit));
+            }
+            else if (isSmuflRend(previous) && currentText && (currentText->GetText().find(U'=') != std::u32string::npos)
+                && m_options->m_tempoNoteEqualsPadding.IsSet()
+                && (m_options->m_tempoNoteEqualsPadding.GetValue() > 0.0)) {
+                dc->AddTextSpacing(std::lround(m_options->m_tempoNoteEqualsPadding.GetValue() * drawingUnit));
+            }
+            else if (previousText && (previousText->GetText().find(U'=') != std::u32string::npos) && currentText
+                && m_options->m_tempoEqualsTextPadding.IsSet()
+                && (m_options->m_tempoEqualsTextPadding.GetValue() > 0.0)) {
+                dc->AddTextSpacing(std::lround(m_options->m_tempoEqualsTextPadding.GetValue() * drawingUnit));
+            }
+        }
         if (current->IsTextElement()) {
             this->DrawTextElement(dc, dynamic_cast<TextElement *>(current), params);
         }
@@ -1844,6 +1874,7 @@ void View::DrawTextChildren(DeviceContext *dc, Object *parent, TextDrawingParams
         else {
             assert(false);
         }
+        previous = current;
     }
 }
 

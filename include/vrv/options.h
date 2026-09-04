@@ -769,6 +769,10 @@ public:
     OptionIntMap m_systemDivider;
     OptionInt m_systemMaxPerPage;
     OptionDbl m_tempoDist;
+    OptionDbl m_tempoParenNotePadding;
+    OptionDbl m_tempoNoteEqualsPadding;
+    OptionDbl m_tempoEqualsTextPadding;
+    OptionDbl m_tempoClosingParenPadding;
     OptionDbl m_tempoNoteSize;
     OptionDbl m_textEnclosureThickness;
     OptionDbl m_thickBarlineThickness;
