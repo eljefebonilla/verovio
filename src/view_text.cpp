@@ -411,6 +411,9 @@ void View::DrawRend(DeviceContext *dc, Rend *rend, TextDrawingParams &params)
         rendFont.SetFaceName(m_doc->GetResources().GetCurrentFont());
         int pointSize = (rendFont.GetPointSize() != 0) ? rendFont.GetPointSize() : params.m_pointSize;
         rendFont.SetPointSize(pointSize * m_doc->GetMusicToLyricFontSizeRatio());
+        if (rend->GetFirstAncestor(TEMPO) && m_options->m_tempoNoteSize.IsSet()) {
+            rendFont.SetPointSize(rendFont.GetPointSize() * m_options->m_tempoNoteSize.GetValue());
+        }
         customFont = true;
     }
     if (rend->HasFontstyle()) {

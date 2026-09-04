@@ -2295,6 +2295,11 @@ data_MEASUREMENTSIGNED Doc::GetStaffDistance(const Object *object, int staffInde
             if (staffDef != NULL && staffDef->HasTempoDist()) {
                 distance = staffDef->GetTempoDist();
             }
+
+            // Apply CLI option if set
+            if (m_options->m_tempoDist.IsSet()) {
+                distance.SetVu(m_options->m_tempoDist.GetValue());
+            }
         }
     }
     return distance;
