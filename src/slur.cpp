@@ -1029,8 +1029,10 @@ std::pair<Point, Point> Slur::CalcEndPoints(const Doc *doc, const Staff *staff, 
                     const int xShift = std::lround(staffSpace * (normalOffset * normalX + horizontalOffset));
                     x1 += xShift;
                     x2 += xShift;
-                    y1 += std::lround(sign * staffSpace * clearance - slope * dy / 2.0);
-                    y2 += std::lround(sign * staffSpace * clearance + slope * dy / 2.0);
+                    // A larger pitch interval must not pull either endpoint closer
+                    // to its notehead than the stock attachment.
+                    y1 += sign * std::lround(std::max(0.0, staffSpace * clearance - sign * slope * dy / 2.0));
+                    y2 += sign * std::lround(std::max(0.0, staffSpace * clearance + sign * slope * dy / 2.0));
                 }
             }
         }
