@@ -696,6 +696,8 @@ public:
 
     OptionDbl m_barLineSeparation;
     OptionDbl m_barLineWidth;
+    OptionDbl m_barLineTickHeight;
+    OptionDbl m_barLineTickWidth;
     OptionBool m_beamFrenchStyle;
     OptionInt m_beamMaxSlope;
     OptionBool m_beamMixedPreserve;

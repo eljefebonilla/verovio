@@ -768,6 +768,26 @@ void View::DrawBarLines(DeviceContext *dc, Measure *measure, StaffGrp *staffGrp,
         }
         int yTop = yBottom + yLength;
 
+        // MusicXML tick imports as a single right bar with this explicit MEI shape.
+        // Do not style half bars, ordinary/full bars, repeats, or contextual takt bars.
+        const bool isTick = !methodMensur && !methodTakt && (form == BARRENDITION_single)
+            && (barLine->GetPosition() == BarLinePosition::Right) && measure->HasBarLen()
+            && (measure->GetBarLen() == 4.0) && measure->HasBarPlace() && (measure->GetBarPlace() == 6);
+        int tickWidth = 0;
+        if (isTick) {
+            const int staffSpace = m_doc->GetDrawingDoubleUnit(staff->m_drawingStaffSize);
+            const double height = m_options->m_barLineTickHeight.GetValue();
+            if (height > 0.0) {
+                const int length = std::max(1, static_cast<int>(std::lround(height * staffSpace)));
+                yTop = yStaffTop + (length + 1) / 2;
+                yBottom = yTop - length;
+            }
+            const double width = m_options->m_barLineTickWidth.GetValue();
+            if (width > 0.0) {
+                tickWidth = std::max(1, static_cast<int>(std::lround(width * staffSpace)));
+            }
+        }
+
         // Shift the taktstrich outwards?
         const int yTaktstrichShift = methodMensur ? unit : 0;
 
@@ -784,7 +804,7 @@ void View::DrawBarLines(DeviceContext *dc, Measure *measure, StaffGrp *staffGrp,
 
         // Now draw the barline part inside the staff
         if (drawInsideStaff) {
-            this->DrawBarLine(dc, yTop, yBottom, barLine, form);
+            this->DrawBarLine(dc, yTop, yBottom, barLine, form, false, false, tickWidth);
             if (barLine->HasRepetitionDots()) {
                 this->DrawBarLineDots(dc, staff, barLine);
             }
@@ -814,7 +834,7 @@ void View::DrawBarLines(DeviceContext *dc, Measure *measure, StaffGrp *staffGrp,
 }
 
 void View::DrawBarLine(DeviceContext *dc, int yTop, int yBottom, BarLine *barLine, data_BARRENDITION form,
-    bool inStaffSpace, bool eraseIntersections)
+    bool inStaffSpace, bool eraseIntersections, int widthOverride)
 {
     assert(dc);
     assert(barLine);
@@ -824,7 +844,7 @@ void View::DrawBarLine(DeviceContext *dc, int yTop, int yBottom, BarLine *barLin
     const int unit = m_doc->GetDrawingUnit(staffSize);
 
     const int x = barLine->GetDrawingX();
-    const int barLineWidth = m_doc->GetDrawingBarLineWidth(staffSize);
+    const int barLineWidth = (widthOverride > 0) ? widthOverride : m_doc->GetDrawingBarLineWidth(staffSize);
     const int barLineThickWidth = unit * m_options->m_thickBarlineThickness.GetValue();
     const int barLineSeparation = unit * m_options->m_barLineSeparation.GetValue();
     const int barLinesSum = barLineThickWidth + barLineWidth;
