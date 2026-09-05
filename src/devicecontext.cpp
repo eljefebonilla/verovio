@@ -77,6 +77,14 @@ void BezierCurve::CalcInitialControlPointParams(const Doc *doc, float angle, int
         height *= doc->GetOptions()->m_slurCurveFactor.GetValue();
         height = std::min(height, 2 * doc->GetDrawingOctaveSize(staffSize));
         height = std::min<int>(height, 2 * offset * cos(angle));
+        const double minHeight = doc->GetOptions()->m_slurMinHeight.GetValue();
+        if (minHeight > 0.0) {
+            // Equal-height cubic controls place the centerline apex at 3/4 of
+            // their height. This opt-in floor overrides the angular heuristic.
+            const int controlFloor = std::lround(4.0 / 3.0 * doc->GetDrawingDoubleUnit(staffSize) * minHeight);
+            height = std::max(height, controlFloor);
+            height = std::min(height, 2 * doc->GetDrawingOctaveSize(staffSize));
+        }
     }
     else {
         height = std::max(std::abs(p2.y - p1.y), 4 * unit);
