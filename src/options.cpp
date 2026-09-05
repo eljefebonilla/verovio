@@ -1236,6 +1236,18 @@ Options::Options()
     m_barLineWidth.Init(0.30, 0.10, 0.80);
     this->Register(&m_barLineWidth, "barLineWidth", &m_generalLayout);
 
+    m_barLineTickHeight.SetInfo("Tick barline height",
+        "Height in staff spaces of right single barlines encoded with bar.len=4 and bar.place=6; "
+        "positive values center the tick on the top staff line; zero preserves stock geometry");
+    m_barLineTickHeight.Init(0.0, 0.0, 4.0);
+    this->Register(&m_barLineTickHeight, "barLineTickHeight", &m_generalLayout);
+
+    m_barLineTickWidth.SetInfo("Tick barline width",
+        "Width in staff spaces of right single barlines encoded with bar.len=4 and bar.place=6; "
+        "zero preserves the general barline width");
+    m_barLineTickWidth.Init(0.0, 0.0, 1.0);
+    this->Register(&m_barLineTickWidth, "barLineTickWidth", &m_generalLayout);
+
     m_beamFrenchStyle.SetInfo(
         "French style of beams", "For notes in beams, stems will stop at first outermost sub-beam without crossing it");
     m_beamFrenchStyle.Init(false);
