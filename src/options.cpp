@@ -1483,6 +1483,12 @@ Options::Options()
     m_slurMidpointThickness.Init(0.6, 0.2, 1.2);
     this->Register(&m_slurMidpointThickness, "slurMidpointThickness", &m_generalLayout);
 
+    m_slurMinHeight.SetInfo("Slur minimum initial height",
+        "Minimum initial centerline arc height of convex slurs in staff spaces; overrides the initial angular height "
+        "heuristic, subject to the octave bound and subsequent collision adjustment; zero preserves automatic height");
+    m_slurMinHeight.Init(0.0, 0.0, 2.0);
+    this->Register(&m_slurMinHeight, "slurMinHeight", &m_generalLayout);
+
     m_slurStemlessClearance.SetInfo("Stemless slur clearance",
         "Additional outward vertical clearance for unbroken stemless-note slurs in staff spaces");
     m_slurStemlessClearance.Init(0.0, 0.0, 2.0);

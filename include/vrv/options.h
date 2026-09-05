@@ -754,6 +754,7 @@ public:
     OptionDbl m_slurMargin;
     OptionInt m_slurMaxSlope;
     OptionDbl m_slurMidpointThickness;
+    OptionDbl m_slurMinHeight;
     OptionDbl m_slurStemlessClearance;
     OptionDbl m_slurStemlessSlope;
     OptionDbl m_slurStemlessNormalOffset;
