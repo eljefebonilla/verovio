@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<score-partwise version="4.0">
+<part-list><score-part id="P1"><part-name>Fixture</part-name></score-part></part-list>
+<part id="P1">
+<measure number="91">
+<attributes><divisions>8</divisions><time><beats>4</beats><beat-type>4</beat-type></time><clef><sign>G</sign><line>2</line></clef></attributes><direction><direction-type><words/></direction-type><sound tempo="92"/></direction><note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note><note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note><note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note><note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note>
+</measure>
+<measure number="92">
+<note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note><note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note><note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note><direction placement="above"><direction-type><metronome font-family="Bravura Text" font-style="normal" font-size="15.225"><beat-unit>quarter</beat-unit><per-minute font-family="Academico" font-style="normal" font-size="8.7">50</per-minute></metronome></direction-type><staff>1</staff></direction><note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note>
+</measure>
+<measure number="93">
+<note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note><note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note><note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note><note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note>
+</measure>
+</part>
+</score-partwise>
