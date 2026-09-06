@@ -4083,6 +4083,21 @@ void MusicXmlInput::ReadMusicXmlSound(pugi::xml_node node, Measure *measure, Sec
     assert(measure);
     assert(section);
 
+    // Direction-wrapped sounds already create a Tempo in ReadMusicXmlDirection.
+    // Preserve the initial scoreDef shortcut without importing that same event twice.
+    if (IsElement(node.parent(), "measure") && node.attribute("tempo")) {
+        const pugi::xml_node initialTempo
+            = node.root().select_node("/score-partwise/part[1]/measure[1]/sound[@tempo][1]").node();
+        if (node != initialTempo) {
+            Tempo *tempo = new Tempo();
+            tempo->SetMidiBpm(node.attribute("tempo").as_double());
+            const double offset = node.child("offset").text().as_double();
+            tempo->SetTstamp((m_durTotal + offset) * m_meterUnit / (4.0 * m_ppq) + 1.0);
+            // Playback-only sound: no text or metronome children to print.
+            m_controlElements.push_back({ node.parent().attribute("number").as_string(), tempo });
+        }
+    }
+
     // get MEI tuning
     pugi::xpath_node meiTuning = node.select_node("play/other-play[@type='tuning-mei']");
     if (meiTuning) {

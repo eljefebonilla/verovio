@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<score-partwise version="4.0">
+<part-list><score-part id="P1"><part-name>Fixture</part-name></score-part></part-list>
+<part id="P1">
+<measure number="4" width="461">
+      <print page-number="1">
+        <system-layout>
+          <top-system-distance>192</top-system-distance>
+        </system-layout>
+        <measure-numbering multiple-rest-always="no" multiple-rest-range="no" system="only-top">measure</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>8</divisions>
+        <key>
+          <fifths>2</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+      </attributes>
+      <sound tempo="120">
+        <swing>
+          <straight/>
+        </swing>
+      </sound>
+      <harmony default-y="44">
+        <root>
+          <root-step>D</root-step>
+        </root>
+        <kind halign="center" text="">major</kind>
+      </harmony>
+      <note default-x="122">
+        <pitch>
+          <step>D</step>
+          <octave>5</octave>
+        </pitch>
+        <duration>12</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <dot/>
+        <stem default-y="-45">down</stem>
+        <lyric default-y="-92" number="1">
+          <syllabic>begin</syllabic>
+          <text>Hal</text>
+        </lyric>
+      </note>
+      <note default-x="249">
+        <pitch>
+          <step>A</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>eighth</type>
+        <stem default-y="10">up</stem>
+        <lyric default-y="-92" number="1">
+          <syllabic>middle</syllabic>
+          <text>le</text>
+        </lyric>
+      </note>
+      <harmony default-y="44">
+        <root>
+          <root-step>G</root-step>
+        </root>
+        <kind halign="center" text="">major</kind>
+      </harmony>
+      <note default-x="291">
+        <pitch>
+          <step>B</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>eighth</type>
+        <stem default-y="15">up</stem>
+        <beam number="1">begin</beam>
+        <lyric default-y="-92" number="1">
+          <syllabic>middle</syllabic>
+          <text>lu</text>
+        </lyric>
+      </note>
+      <harmony default-y="44">
+        <root>
+          <root-step>D</root-step>
+        </root>
+        <kind halign="center" text="">major</kind>
+      </harmony>
+      <note default-x="333">
+        <pitch>
+          <step>A</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>eighth</type>
+        <stem default-y="10">up</stem>
+        <beam number="1">end</beam>
+        <lyric default-y="-92" number="1">
+          <syllabic>end</syllabic>
+          <text>jah!</text>
+        </lyric>
+      </note>
+      <note default-x="375">
+        <rest/>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+      </note>
+    </measure>
+<measure number="5">
+<note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note><note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note><note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note><note><pitch><step>C</step><octave>4</octave></pitch><duration>8</duration><type>quarter</type></note>
+</measure>
+</part>
+</score-partwise>
