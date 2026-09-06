@@ -1,0 +1,31 @@
+{
+  "family": "Glow Chant",
+  "resourceId": "GlowChant",
+  "postScriptName": "GlowChant-Regular",
+  "version": "1.350",
+  "derivation": "Glow Chant, a Modified Version under the OFL, converted and subset for Verovio by Parish Glow, 2026",
+  "sourceRepository": "https://github.com/fkretlow/sebastian",
+  "sourceCommit": "cb6a92e73476b1d009dcf7b941549b74e151252d",
+  "sourceFiles": [
+    {
+      "sha256": "eae3dd8a95b13bed17e147ab40b2411ac693d9c7a74b284c03e1bdbb530b55b0",
+      "url": "https://github.com/fkretlow/sebastian/blob/cb6a92e73476b1d009dcf7b941549b74e151252d/fonts/OFL.txt"
+    },
+    {
+      "sha256": "0b4a3b12ce575ccd19650be4810ffb292679226ddf472de5aaf44cf06129d347",
+      "url": "https://github.com/fkretlow/sebastian/blob/cb6a92e73476b1d009dcf7b941549b74e151252d/fonts/Sebastian.otf"
+    },
+    {
+      "sha256": "afc32e693f2ed12b8e68277b9101b598f77f76bf035c1581e4dbacf5bad0d270",
+      "url": "https://github.com/fkretlow/sebastian/blob/cb6a92e73476b1d009dcf7b941549b74e151252d/fonts/Sebastian.json"
+    }
+  ],
+  "renamedFontSha256": "81443781b5f7fbb9b6030be84c8e61225bebe32bf39bc7b113199d1d899cd9dd",
+  "licenseSha256": "c00944df4b8de9fc10256fd72951a986a6201f16147930c9c9af861601fa6ecd",
+  "metadataOmittedNullBoxes": [
+    "dynamicCombinedSeparatorSpace",
+    "arrowBlackDownRight",
+    "noteheadNull"
+  ],
+  "generator": "fontTools 4.60.2; Brotli 1.2.0; generate_glow_chant.py"
+}

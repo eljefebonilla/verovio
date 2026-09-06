@@ -1,0 +1,965 @@
+{
+  "family": "Glow Chant",
+  "resourceId": "GlowChant",
+  "unitsPerEm": 1000,
+  "supported": 650,
+  "present": 412,
+  "missing": [
+    {
+      "code": "E045",
+      "name": "dalSegno"
+    },
+    {
+      "code": "E046",
+      "name": "daCapo"
+    },
+    {
+      "code": "E055",
+      "name": "gClef8vbOld"
+    },
+    {
+      "code": "E056",
+      "name": "gClef8vbCClef"
+    },
+    {
+      "code": "E075",
+      "name": "cClefReversed"
+    },
+    {
+      "code": "E076",
+      "name": "fClefReversed"
+    },
+    {
+      "code": "E077",
+      "name": "fClefTurned"
+    },
+    {
+      "code": "E0FA",
+      "name": "noteheadWholeFilled"
+    },
+    {
+      "code": "E0FB",
+      "name": "noteheadHalfFilled"
+    },
+    {
+      "code": "E1DD",
+      "name": "note64thUp"
+    },
+    {
+      "code": "E1DF",
+      "name": "note128thUp"
+    },
+    {
+      "code": "E1E1",
+      "name": "note256thUp"
+    },
+    {
+      "code": "E1E3",
+      "name": "note512thUp"
+    },
+    {
+      "code": "E1E5",
+      "name": "note1024thUp"
+    },
+    {
+      "code": "E224",
+      "name": "tremolo5"
+    },
+    {
+      "code": "E445",
+      "name": "accidentalBakiyeSharp"
+    },
+    {
+      "code": "E446",
+      "name": "accidentalKucukMucennebSharp"
+    },
+    {
+      "code": "E447",
+      "name": "accidentalBuyukMucennebSharp"
+    },
+    {
+      "code": "E460",
+      "name": "accidentalKoron"
+    },
+    {
+      "code": "E461",
+      "name": "accidentalSori"
+    },
+    {
+      "code": "E4BA",
+      "name": "articLaissezVibrerAbove"
+    },
+    {
+      "code": "E4BB",
+      "name": "articLaissezVibrerBelow"
+    },
+    {
+      "code": "E4BC",
+      "name": "articMarcatoTenutoAbove"
+    },
+    {
+      "code": "E4BD",
+      "name": "articMarcatoTenutoBelow"
+    },
+    {
+      "code": "E594",
+      "name": "ornamentLeftVerticalStroke"
+    },
+    {
+      "code": "E595",
+      "name": "ornamentLeftVerticalStrokeWithCross"
+    },
+    {
+      "code": "E59D",
+      "name": "ornamentZigZagLineNoRightEnd"
+    },
+    {
+      "code": "E5B7",
+      "name": "ornamentPrecompTurnTrillBach"
+    },
+    {
+      "code": "E5B9",
+      "name": "ornamentPrecompSlideTrillMuffat"
+    },
+    {
+      "code": "E636",
+      "name": "pluckedWithFingernails"
+    },
+    {
+      "code": "E637",
+      "name": "pluckedFingernailFlick"
+    },
+    {
+      "code": "E638",
+      "name": "pluckedDamp"
+    },
+    {
+      "code": "E639",
+      "name": "pluckedDampAll"
+    },
+    {
+      "code": "E771",
+      "name": "pictBeaterSoftXylophoneDown"
+    },
+    {
+      "code": "E774",
+      "name": "pictBeaterMediumXylophoneUp"
+    },
+    {
+      "code": "E775",
+      "name": "pictBeaterMediumXylophoneDown"
+    },
+    {
+      "code": "E776",
+      "name": "pictBeaterMediumXylophoneRight"
+    },
+    {
+      "code": "E777",
+      "name": "pictBeaterMediumXylophoneLeft"
+    },
+    {
+      "code": "E778",
+      "name": "pictBeaterHardXylophoneUp"
+    },
+    {
+      "code": "E779",
+      "name": "pictBeaterHardXylophoneDown"
+    },
+    {
+      "code": "E77A",
+      "name": "pictBeaterHardXylophoneRight"
+    },
+    {
+      "code": "E77B",
+      "name": "pictBeaterHardXylophoneLeft"
+    },
+    {
+      "code": "E77D",
+      "name": "pictBeaterWoodXylophoneDown"
+    },
+    {
+      "code": "E7D1",
+      "name": "pictBeaterSnareSticksUp"
+    },
+    {
+      "code": "E7D2",
+      "name": "pictBeaterSnareSticksDown"
+    },
+    {
+      "code": "E7E3",
+      "name": "pictBeaterHand"
+    },
+    {
+      "code": "E7E4",
+      "name": "pictBeaterFinger"
+    },
+    {
+      "code": "E7E5",
+      "name": "pictBeaterFist"
+    },
+    {
+      "code": "E8F3",
+      "name": "chantDivisioMinima"
+    },
+    {
+      "code": "E8F4",
+      "name": "chantDivisioMaior"
+    },
+    {
+      "code": "E8F5",
+      "name": "chantDivisioMaxima"
+    },
+    {
+      "code": "E8F6",
+      "name": "chantDivisioFinalis"
+    },
+    {
+      "code": "E8F7",
+      "name": "chantVirgula"
+    },
+    {
+      "code": "E8F8",
+      "name": "chantCaesura"
+    },
+    {
+      "code": "E921",
+      "name": "mensuralProlationCombiningTwoDots"
+    },
+    {
+      "code": "E922",
+      "name": "mensuralProlationCombiningThreeDots"
+    },
+    {
+      "code": "E923",
+      "name": "mensuralProlationCombiningThreeDotsTri"
+    },
+    {
+      "code": "E924",
+      "name": "mensuralProlationCombiningDotVoid"
+    },
+    {
+      "code": "E925",
+      "name": "mensuralProlationCombiningStroke"
+    },
+    {
+      "code": "E926",
+      "name": "mensuralProportion1"
+    },
+    {
+      "code": "E927",
+      "name": "mensuralProportion2"
+    },
+    {
+      "code": "E928",
+      "name": "mensuralProportion3"
+    },
+    {
+      "code": "E929",
+      "name": "mensuralProportion4"
+    },
+    {
+      "code": "E93E",
+      "name": "mensuralCombStemUp"
+    },
+    {
+      "code": "E93F",
+      "name": "mensuralCombStemDown"
+    },
+    {
+      "code": "E940",
+      "name": "mensuralCombStemDiagonal"
+    },
+    {
+      "code": "E941",
+      "name": "mensuralCombStemUpFlagRight"
+    },
+    {
+      "code": "E942",
+      "name": "mensuralCombStemDownFlagRight"
+    },
+    {
+      "code": "E943",
+      "name": "mensuralCombStemUpFlagLeft"
+    },
+    {
+      "code": "E944",
+      "name": "mensuralCombStemDownFlagLeft"
+    },
+    {
+      "code": "E945",
+      "name": "mensuralCombStemUpFlagFlared"
+    },
+    {
+      "code": "E946",
+      "name": "mensuralCombStemDownFlagFlared"
+    },
+    {
+      "code": "E947",
+      "name": "mensuralCombStemUpFlagExtended"
+    },
+    {
+      "code": "E948",
+      "name": "mensuralCombStemDownFlagExtended"
+    },
+    {
+      "code": "E949",
+      "name": "mensuralCombStemUpFlagSemiminima"
+    },
+    {
+      "code": "E94A",
+      "name": "mensuralCombStemDownFlagSemiminima"
+    },
+    {
+      "code": "E94B",
+      "name": "mensuralCombStemUpFlagFusa"
+    },
+    {
+      "code": "E94C",
+      "name": "mensuralCombStemDownFlagFusa"
+    },
+    {
+      "code": "E992",
+      "name": "chantPunctumInclinatumAuctum"
+    },
+    {
+      "code": "E993",
+      "name": "chantPunctumInclinatumDeminutum"
+    },
+    {
+      "code": "E994",
+      "name": "chantAuctumAsc"
+    },
+    {
+      "code": "E995",
+      "name": "chantAuctumDesc"
+    },
+    {
+      "code": "E996",
+      "name": "chantPunctumVirga"
+    },
+    {
+      "code": "E997",
+      "name": "chantPunctumVirgaReversed"
+    },
+    {
+      "code": "E99B",
+      "name": "chantQuilisma"
+    },
+    {
+      "code": "E99E",
+      "name": "chantOriscusLiquescens"
+    },
+    {
+      "code": "E99F",
+      "name": "chantStrophicus"
+    },
+    {
+      "code": "E9A1",
+      "name": "chantPunctumDeminutum"
+    },
+    {
+      "code": "E9B0",
+      "name": "chantPodatusLower"
+    },
+    {
+      "code": "E9B1",
+      "name": "chantPodatusUpper"
+    },
+    {
+      "code": "E9B2",
+      "name": "chantDeminutumUpper"
+    },
+    {
+      "code": "E9B3",
+      "name": "chantDeminutumLower"
+    },
+    {
+      "code": "E9B4",
+      "name": "chantEntryLineAsc2nd"
+    },
+    {
+      "code": "E9B5",
+      "name": "chantEntryLineAsc3rd"
+    },
+    {
+      "code": "E9B6",
+      "name": "chantEntryLineAsc4th"
+    },
+    {
+      "code": "E9B7",
+      "name": "chantEntryLineAsc5th"
+    },
+    {
+      "code": "E9B8",
+      "name": "chantEntryLineAsc6th"
+    },
+    {
+      "code": "E9B9",
+      "name": "chantLigaturaDesc2nd"
+    },
+    {
+      "code": "E9BA",
+      "name": "chantLigaturaDesc3rd"
+    },
+    {
+      "code": "E9BB",
+      "name": "chantLigaturaDesc4th"
+    },
+    {
+      "code": "E9BC",
+      "name": "chantLigaturaDesc5th"
+    },
+    {
+      "code": "E9BD",
+      "name": "chantConnectingLineAsc2nd"
+    },
+    {
+      "code": "E9BE",
+      "name": "chantConnectingLineAsc3rd"
+    },
+    {
+      "code": "E9BF",
+      "name": "chantConnectingLineAsc4th"
+    },
+    {
+      "code": "E9C0",
+      "name": "chantConnectingLineAsc5th"
+    },
+    {
+      "code": "E9C1",
+      "name": "chantConnectingLineAsc6th"
+    },
+    {
+      "code": "E9D0",
+      "name": "chantIctusAbove"
+    },
+    {
+      "code": "E9D1",
+      "name": "chantIctusBelow"
+    },
+    {
+      "code": "E9D8",
+      "name": "chantEpisema"
+    },
+    {
+      "code": "E9E0",
+      "name": "medRenFlatSoftB"
+    },
+    {
+      "code": "E9E1",
+      "name": "medRenFlatHardB"
+    },
+    {
+      "code": "E9E2",
+      "name": "medRenNatural"
+    },
+    {
+      "code": "E9E3",
+      "name": "medRenSharpCroix"
+    },
+    {
+      "code": "E9F0",
+      "name": "mensuralRestMaxima"
+    },
+    {
+      "code": "E9F1",
+      "name": "mensuralRestLongaPerfecta"
+    },
+    {
+      "code": "E9F2",
+      "name": "mensuralRestLongaImperfecta"
+    },
+    {
+      "code": "E9F3",
+      "name": "mensuralRestBrevis"
+    },
+    {
+      "code": "E9F4",
+      "name": "mensuralRestSemibrevis"
+    },
+    {
+      "code": "E9F5",
+      "name": "mensuralRestMinima"
+    },
+    {
+      "code": "E9F6",
+      "name": "mensuralRestSemiminima"
+    },
+    {
+      "code": "E9F7",
+      "name": "mensuralRestFusa"
+    },
+    {
+      "code": "E9F8",
+      "name": "mensuralRestSemifusa"
+    },
+    {
+      "code": "EA02",
+      "name": "mensuralCustosUp"
+    },
+    {
+      "code": "EA06",
+      "name": "chantCustosStemUpPosMiddle"
+    },
+    {
+      "code": "EA29",
+      "name": "medRenStrophicusCMN"
+    },
+    {
+      "code": "EA2A",
+      "name": "medRenOriscusCMN"
+    },
+    {
+      "code": "EB1C",
+      "name": "elecPlay"
+    },
+    {
+      "code": "EB1D",
+      "name": "elecStop"
+    },
+    {
+      "code": "EB1E",
+      "name": "elecPause"
+    },
+    {
+      "code": "EB1F",
+      "name": "elecFastForward"
+    },
+    {
+      "code": "EB20",
+      "name": "elecRewind"
+    },
+    {
+      "code": "EB21",
+      "name": "elecSkipForwards"
+    },
+    {
+      "code": "EB22",
+      "name": "elecSkipBackwards"
+    },
+    {
+      "code": "EB90",
+      "name": "staffPosRaise1"
+    },
+    {
+      "code": "EB91",
+      "name": "staffPosRaise2"
+    },
+    {
+      "code": "EB92",
+      "name": "staffPosRaise3"
+    },
+    {
+      "code": "EB93",
+      "name": "staffPosRaise4"
+    },
+    {
+      "code": "EB94",
+      "name": "staffPosRaise5"
+    },
+    {
+      "code": "EB95",
+      "name": "staffPosRaise6"
+    },
+    {
+      "code": "EB96",
+      "name": "staffPosRaise7"
+    },
+    {
+      "code": "EB97",
+      "name": "staffPosRaise8"
+    },
+    {
+      "code": "EB98",
+      "name": "staffPosLower1"
+    },
+    {
+      "code": "EB99",
+      "name": "staffPosLower2"
+    },
+    {
+      "code": "EB9A",
+      "name": "staffPosLower3"
+    },
+    {
+      "code": "EB9B",
+      "name": "staffPosLower4"
+    },
+    {
+      "code": "EB9C",
+      "name": "staffPosLower5"
+    },
+    {
+      "code": "EB9D",
+      "name": "staffPosLower6"
+    },
+    {
+      "code": "EB9E",
+      "name": "staffPosLower7"
+    },
+    {
+      "code": "EB9F",
+      "name": "staffPosLower8"
+    },
+    {
+      "code": "EBA6",
+      "name": "luteDurationDoubleWhole"
+    },
+    {
+      "code": "EBA7",
+      "name": "luteDurationWhole"
+    },
+    {
+      "code": "EBA8",
+      "name": "luteDurationHalf"
+    },
+    {
+      "code": "EBA9",
+      "name": "luteDurationQuarter"
+    },
+    {
+      "code": "EBAA",
+      "name": "luteDuration8th"
+    },
+    {
+      "code": "EBAB",
+      "name": "luteDuration16th"
+    },
+    {
+      "code": "EBAC",
+      "name": "luteDuration32nd"
+    },
+    {
+      "code": "EBC0",
+      "name": "luteFrenchFretA"
+    },
+    {
+      "code": "EBC1",
+      "name": "luteFrenchFretB"
+    },
+    {
+      "code": "EBC2",
+      "name": "luteFrenchFretC"
+    },
+    {
+      "code": "EBC3",
+      "name": "luteFrenchFretD"
+    },
+    {
+      "code": "EBC4",
+      "name": "luteFrenchFretE"
+    },
+    {
+      "code": "EBC5",
+      "name": "luteFrenchFretF"
+    },
+    {
+      "code": "EBC6",
+      "name": "luteFrenchFretG"
+    },
+    {
+      "code": "EBC7",
+      "name": "luteFrenchFretH"
+    },
+    {
+      "code": "EBC8",
+      "name": "luteFrenchFretI"
+    },
+    {
+      "code": "EBC9",
+      "name": "luteFrenchFretK"
+    },
+    {
+      "code": "EBCA",
+      "name": "luteFrenchFretL"
+    },
+    {
+      "code": "EBCB",
+      "name": "luteFrenchFretM"
+    },
+    {
+      "code": "EBCC",
+      "name": "luteFrenchFretN"
+    },
+    {
+      "code": "EBCD",
+      "name": "luteFrench7thCourse"
+    },
+    {
+      "code": "EBCE",
+      "name": "luteFrench8thCourse"
+    },
+    {
+      "code": "EBCF",
+      "name": "luteFrench9thCourse"
+    },
+    {
+      "code": "EBD0",
+      "name": "luteFrench10thCourse"
+    },
+    {
+      "code": "EBE0",
+      "name": "luteItalianFret0"
+    },
+    {
+      "code": "EBE1",
+      "name": "luteItalianFret1"
+    },
+    {
+      "code": "EBE2",
+      "name": "luteItalianFret2"
+    },
+    {
+      "code": "EBE3",
+      "name": "luteItalianFret3"
+    },
+    {
+      "code": "EBE4",
+      "name": "luteItalianFret4"
+    },
+    {
+      "code": "EBE5",
+      "name": "luteItalianFret5"
+    },
+    {
+      "code": "EBE6",
+      "name": "luteItalianFret6"
+    },
+    {
+      "code": "EBE7",
+      "name": "luteItalianFret7"
+    },
+    {
+      "code": "EBE8",
+      "name": "luteItalianFret8"
+    },
+    {
+      "code": "EBE9",
+      "name": "luteItalianFret9"
+    },
+    {
+      "code": "EC00",
+      "name": "luteGermanALower"
+    },
+    {
+      "code": "EC01",
+      "name": "luteGermanBLower"
+    },
+    {
+      "code": "EC02",
+      "name": "luteGermanCLower"
+    },
+    {
+      "code": "EC03",
+      "name": "luteGermanDLower"
+    },
+    {
+      "code": "EC04",
+      "name": "luteGermanELower"
+    },
+    {
+      "code": "EC05",
+      "name": "luteGermanFLower"
+    },
+    {
+      "code": "EC06",
+      "name": "luteGermanGLower"
+    },
+    {
+      "code": "EC07",
+      "name": "luteGermanHLower"
+    },
+    {
+      "code": "EC08",
+      "name": "luteGermanILower"
+    },
+    {
+      "code": "EC09",
+      "name": "luteGermanKLower"
+    },
+    {
+      "code": "EC0A",
+      "name": "luteGermanLLower"
+    },
+    {
+      "code": "EC0B",
+      "name": "luteGermanMLower"
+    },
+    {
+      "code": "EC0C",
+      "name": "luteGermanNLower"
+    },
+    {
+      "code": "EC0D",
+      "name": "luteGermanOLower"
+    },
+    {
+      "code": "EC0E",
+      "name": "luteGermanPLower"
+    },
+    {
+      "code": "EC0F",
+      "name": "luteGermanQLower"
+    },
+    {
+      "code": "EC10",
+      "name": "luteGermanRLower"
+    },
+    {
+      "code": "EC11",
+      "name": "luteGermanSLower"
+    },
+    {
+      "code": "EC12",
+      "name": "luteGermanTLower"
+    },
+    {
+      "code": "EC13",
+      "name": "luteGermanVLower"
+    },
+    {
+      "code": "EC14",
+      "name": "luteGermanXLower"
+    },
+    {
+      "code": "EC15",
+      "name": "luteGermanYLower"
+    },
+    {
+      "code": "EC16",
+      "name": "luteGermanZLower"
+    },
+    {
+      "code": "EC17",
+      "name": "luteGermanAUpper"
+    },
+    {
+      "code": "EC18",
+      "name": "luteGermanBUpper"
+    },
+    {
+      "code": "EC19",
+      "name": "luteGermanCUpper"
+    },
+    {
+      "code": "EC1A",
+      "name": "luteGermanDUpper"
+    },
+    {
+      "code": "EC1B",
+      "name": "luteGermanEUpper"
+    },
+    {
+      "code": "EC1C",
+      "name": "luteGermanFUpper"
+    },
+    {
+      "code": "EC1D",
+      "name": "luteGermanGUpper"
+    },
+    {
+      "code": "EC1E",
+      "name": "luteGermanHUpper"
+    },
+    {
+      "code": "EC1F",
+      "name": "luteGermanIUpper"
+    },
+    {
+      "code": "EC20",
+      "name": "luteGermanKUpper"
+    },
+    {
+      "code": "EC21",
+      "name": "luteGermanLUpper"
+    },
+    {
+      "code": "EC22",
+      "name": "luteGermanMUpper"
+    },
+    {
+      "code": "EC23",
+      "name": "luteGermanNUpper"
+    },
+    {
+      "code": "EC80",
+      "name": "timeSigBracketLeft"
+    },
+    {
+      "code": "EC81",
+      "name": "timeSigBracketRight"
+    },
+    {
+      "code": "EC82",
+      "name": "timeSigBracketLeftSmall"
+    },
+    {
+      "code": "EC83",
+      "name": "timeSigBracketRightSmall"
+    },
+    {
+      "code": "EC84",
+      "name": "timeSigSlash"
+    },
+    {
+      "code": "EC86",
+      "name": "timeSigCut3"
+    },
+    {
+      "code": "ECAD",
+      "name": "metNote64thUp"
+    },
+    {
+      "code": "ECAF",
+      "name": "metNote128thUp"
+    },
+    {
+      "code": "ECB1",
+      "name": "metNote256thUp"
+    },
+    {
+      "code": "ECB3",
+      "name": "metNote512thUp"
+    },
+    {
+      "code": "ECB5",
+      "name": "metNote1024thUp"
+    },
+    {
+      "code": "ECC0",
+      "name": "figbass7Diminished"
+    },
+    {
+      "code": "ED40",
+      "name": "articSoftAccentAbove"
+    },
+    {
+      "code": "ED41",
+      "name": "articSoftAccentBelow"
+    },
+    {
+      "code": "EE90",
+      "name": "mensuralProportion5"
+    },
+    {
+      "code": "EE91",
+      "name": "mensuralProportion6"
+    },
+    {
+      "code": "EE92",
+      "name": "mensuralProportion7"
+    },
+    {
+      "code": "EE93",
+      "name": "mensuralProportion8"
+    },
+    {
+      "code": "EE94",
+      "name": "mensuralProportion9"
+    }
+  ],
+  "woff2Sha256": "58223fb27e1068277924a11813f03bfa7eaccd8835c9bf03ccb30f35cebe6417",
+  "metadataValidated": true,
+  "reservedNameAbsentFromFontNames": true,
+  "boundary": "Missing glyphs use the existing fallback. Slurs, lyric connectors and modern tick barlines are engine geometry, not these glyphs."
+}

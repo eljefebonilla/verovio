@@ -29,4 +29,8 @@ echo "Generating Leland files ..."
 $PYTHON generate.py extract Leland
 $PYTHON generate.py css Leland $@
 
+# Glow Chant has a separate deterministic fontTools pipeline. Its pinned source
+# is already renamed; this does not rebuild any of the preceding fonts.
+$PYTHON generate_glow_chant.py || exit $?
+
 echo "Done!"

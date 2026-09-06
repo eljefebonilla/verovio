@@ -5,6 +5,7 @@
 * **[Gootville](https://github.com/musescore/MuseScore/tree/master/fonts/gootville)** is designed by Grzegorz Pruchniakowski and comes with [MuseScore](https://musescore.org/).
 * **[Petaluma](https://github.com/steinbergmedia/petaluma)** is designed by [Steinberg](https://www.steinberg.net/).
 * **[Leland](https://github.com/MuseScoreFonts/Leland)** has been developed for [MuseScore Studio](https://musescore.org/) (3.6).
+* **[Glow Chant](GlowChant/README.md)** is an OFL Modified Version prepared by Parish Glow; its original source attribution and complete license are retained with the font.
 
 ## Text font
 
