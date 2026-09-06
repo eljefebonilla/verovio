@@ -12,6 +12,7 @@
 #include <optional>
 #include <queue>
 #include <string>
+#include <tuple>
 #include <vector>
 
 //----------------------------------------------------------------------------
@@ -697,8 +698,10 @@ private:
     std::map<Measure *, int> m_measureCounts;
     /* measure rests */
     std::map<int, int> m_multiRests;
-    /* a map of current accidental for each pitch class */
-    std::map<data_PITCHNAME, std::vector<musicxml::Accidental>> m_currentAccids;
+    /* Key-signature defaults, separate from measure-local compatibility state. */
+    std::map<data_PITCHNAME, std::vector<musicxml::Accidental>> m_keySigAccids;
+    /* Carried written glyphs keyed by pitch name, source octave and voice. */
+    std::map<std::tuple<data_PITCHNAME, int, int>, std::vector<musicxml::Accidental>> m_currentAccids;
     /* current key signature */
     KeySig *m_currentKeySig = NULL;
     /* A flag indicating we had a clef change */

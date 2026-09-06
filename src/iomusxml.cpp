@@ -461,15 +461,22 @@ void MusicXmlInput::AddLayerElement(Layer *layer, LayerElement *element, int dur
 
 Layer *MusicXmlInput::SelectLayer(pugi::xml_node node, Measure *measure)
 {
-    // If value is initialized - get current layer
-    if (m_isLayerInitialized) return m_currentLayer;
+    // Non-note events without a voice keep their current layer (for example,
+    // middle barlines and a final forward). Only explicit voice changes or notes
+    // need to re-examine the cached voice.
+    if (m_isLayerInitialized && !IsElement(node, "note") && !node.child("voice")) return m_currentLayer;
 
+    // Find voice number before reusing a cached layer. MusicXML can switch
+    // voices without a backup when the next voice starts at the current time.
+    // Keep the same voice's layer for cross-staff notes and their containers.
     // Find voice number of node
     short int layerNum = (node.child("voice")) ? node.child("voice").text().as_int() : 1;
     if (layerNum < 1) {
         LogWarning("MusicXML import: Layer %d cannot be found", layerNum);
         layerNum = 1;
     }
+
+    if (m_isLayerInitialized && m_currentLayer->GetN() == layerNum) return m_currentLayer;
 
     // If not initialized and layer is not set - get first layer in the first staff
     if (!m_currentLayer) {
@@ -3150,22 +3157,33 @@ void MusicXmlInput::ReadMusicXmlNote(
                 note->SetOct(octaveNum);
             }
 
-            // adjust accidental (including glyph) based on carried-over accidentals
-            // or update the carried-over accidentals with current accidental value.
+            // Sounding pitch is independent of the written accidental. An
+            // omitted MusicXML alter means zero, including after a written sharp.
+            const float alter = pitch.child("alter").text().as_float(0.0);
+            const data_ACCIDENTAL_GESTURAL soundingAccid = ConvertAlterToAccid(alter);
+            if (soundingAccid == ACCIDENTAL_GESTURAL_NONE) {
+                LogWarning("MusicXML import: Unsupported pitch alter %g", alter);
+            }
             if (note->HasPname()) {
+                // This compatibility state is measure-local and never crosses
+                // voices or source octaves. Key-signature seeds stay separate.
+                const auto key = std::make_tuple(note->GetPname(), octaveNum, layer->GetN());
+                auto &currentAccids
+                    = m_currentAccids.try_emplace(key, m_keySigAccids[note->GetPname()]).first->second;
                 ListOfObjects accids = note->FindAllDescendantsByType(ACCID);
-                if (!accids.size()) {
-                    try {
-                        for (const auto &current : m_currentAccids.at(note->GetPname())) {
-                            Accid *accid = new Accid();
-                            note->AddChild(accid);
-                            accid->IsAttribute(false);
-
-                            // to make sure the new *gestural* accidental conforms to the carried-over *written*
-                            // accidental, we translate the latter to a SMuFL glyph and set the gestural accidental to
-                            // the MEI equivalent of the written accidental. The custom tuning will always choose
-                            // the SMuFL glyph over the gestural or written accidentals.
-                            accid->SetAccidGes(Att::AccidentalWrittenToGestural(current.m_accid));
+                if (accids.empty()) {
+                    Accid *accid = new Accid();
+                    note->AddChild(accid);
+                    accid->IsAttribute(false);
+                    accid->SetAccidGes(soundingAccid);
+                    // Custom tuning prefers glyphs to gestural accidentals.
+                    // Only a single known, matching glyph can be carried safely;
+                    // multiple glyphs may have additive custom tuning meanings.
+                    if (currentAccids.size() == 1 && soundingAccid != ACCIDENTAL_GESTURAL_NONE) {
+                        const auto &current = currentAccids.front();
+                        const data_ACCIDENTAL_GESTURAL carriedAccid
+                            = Att::AccidentalWrittenToGestural(current.m_accid);
+                        if (carriedAccid == soundingAccid) {
                             if (!current.m_glyphName.empty()) {
                                 accid->SetGlyphName(current.m_glyphName);
                                 accid->SetGlyphAuth(current.m_glyphAuth);
@@ -3177,16 +3195,15 @@ void MusicXmlInput::ReadMusicXmlNote(
                             }
                         }
                     }
-                    catch (std::out_of_range &e) {
-                        LogWarning("MusicXML import: Unexpected pitch %d", note->GetPname());
-                    }
                 }
                 else {
-                    m_currentAccids[note->GetPname()].clear();
+                    currentAccids.clear();
                     for (Object *object : accids) {
                         Accid *accid = vrv_cast<Accid *>(object);
-                        accid->SetAccidGes(Att::AccidentalWrittenToGestural(accid->GetAccid()));
-                        m_currentAccids[note->GetPname()].push_back(
+                        // Preserve explicit written/custom glyphs. Explicit custom
+                        // tuning retains its existing glyph-precedence semantics.
+                        accid->SetAccidGes(soundingAccid);
+                        currentAccids.push_back(
                             musicxml::Accidental(accid->GetAccid(), accid->GetGlyphName(), accid->GetGlyphAuth()));
                     }
                 }
@@ -4455,8 +4472,9 @@ void MusicXmlInput::ResetAccidentals(const KeySig *keySig)
 {
     // inspired by KeySig::FillMap() but without the octave repetitions
     m_currentAccids.clear();
+    m_keySigAccids.clear();
     for (int i = PITCHNAME_c; i <= PITCHNAME_b; i++) {
-        m_currentAccids[static_cast<data_PITCHNAME>(i)] = { musicxml::Accidental() };
+        m_keySigAccids[static_cast<data_PITCHNAME>(i)] = { musicxml::Accidental() };
     }
 
     if (!keySig) return;
@@ -4466,7 +4484,7 @@ void MusicXmlInput::ResetAccidentals(const KeySig *keySig)
         for (const Object *child : childList) {
             const KeyAccid *keyAccid = vrv_cast<const KeyAccid *>(child);
             assert(keyAccid);
-            m_currentAccids[keyAccid->GetPname()]
+            m_keySigAccids[keyAccid->GetPname()]
                 = { musicxml::Accidental(keyAccid->GetAccid(), keyAccid->GetGlyphName(), keyAccid->GetGlyphAuth()) };
         }
         return;
@@ -4474,7 +4492,7 @@ void MusicXmlInput::ResetAccidentals(const KeySig *keySig)
 
     data_ACCIDENTAL_WRITTEN accidType = keySig->GetAccidType();
     for (int i = 0; i < keySig->GetAccidCount(true); ++i) {
-        m_currentAccids[KeySig::GetAccidPnameAt(accidType, i)] = { musicxml::Accidental(accidType, "", "") };
+        m_keySigAccids[KeySig::GetAccidPnameAt(accidType, i)] = { musicxml::Accidental(accidType, "", "") };
     }
 }
 
